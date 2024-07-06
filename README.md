@@ -38,13 +38,13 @@ yarn dev
 
 ## Use VSCode github feature to commit/push to repository
 
-- github repository "rastridge/newnuxt311"
+- github repository "rastridge/newnuxt312"
 
 ## Change to the repository triggers Netlify build
 
 Netlify site "buffalorugby"
 
-- site sourced from github repository "rastridge/newnuxt311"
+- site sourced from github repository "rastridge/newnuxt312"
 - All ENV variables must be registered
 - All redirects from old website URLs handled by \_redirect file
 - Dreamhost buffalorugby is DNS only - No web hosting

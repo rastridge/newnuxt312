@@ -14,7 +14,7 @@
   })
 
   useSeoMeta({
-    title: 'The Buffalo Rugby Clubx',
+    title: 'The Buffalo Rugby Club',
     // url: 'https://experimental--buffalorugbyorg.netlify.app/archives/news/html/1067',
 
     ogTitle: 'The Buffalo Rugby Cluby',
@@ -25,15 +25,6 @@
     ogImage: 'https://experimental--buffalorugbyorg.netlify.app//bflo_blue.png',
   })
 
-  /*   useSeoMeta({
-      title: 'The Buffalo Rugby Club',
-      ogUrl: 'https://buffalorugby.org/archives/news/page/1068',
-
-      ogType: 'article',
-      ogTitle: 'When Great Minds Don’t Think Alike',
-      ogDescription: 'Buffalo Rugby Club News',
-      ogImage: 'https://buffalorugby.org/bflo_blue.png',
-    }) */
   //
   // get custom menu items
   await menuStore.initCustomMenuItems()
