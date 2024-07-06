@@ -24,7 +24,6 @@
     //   'https://experimental--buffalorugbyorg.netlify.app/archives/news/html/1067',
     ogImage: 'https://experimental--buffalorugbyorg.netlify.app//bflo_blue.png',
   })
-
   //
   // get custom menu items
   await menuStore.initCustomMenuItems()
