@@ -5,9 +5,6 @@
       :options="gametypes"
       optionLabel="label"
       optionValue="value"
-      :pt="{
-        item: { class: 'text-sm md:text-lg  font-semibold' },
-      }"
     />
   </div>
 </template>

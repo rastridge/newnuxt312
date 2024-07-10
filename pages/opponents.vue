@@ -21,7 +21,6 @@
           paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
           currentPageReportTemplate="{first} to {last} of {totalRecords}"
           selectionMode="single"
-          @rowExpand="onRowExpand"
         >
           <template #empty> No opponents found. </template>
           <template #loading> Loading opponents data. Please wait. </template>
@@ -107,7 +106,7 @@
     method: 'get',
   })
 
-  const onRowExpand = async (event) => {}
+  // const onRowExpand = async (event) => {}
   //
   // filter value criteria
   //

@@ -19,12 +19,12 @@ export default defineNuxtConfig({
     TWILIO_NUMBER: process.env.TWILIO_NUMBER,
     TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
     TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
-
     SEASON_DIVIDE_DATE: process.env.SEASON_DIVIDE_DATE,
 
     // Keys within public, will be also be
     // exposed to the client-side
     public: {
+      SEASON_DIVIDE_DT: process.env.SEASON_DIVIDE_DT,
       MEDIA_URL: process.env.MEDIA_URL,
       IMAGES_URL: process.env.IMAGES_URL,
       TITLE: process.env.TITLE,

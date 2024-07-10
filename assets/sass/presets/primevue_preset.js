@@ -1,14 +1,14 @@
 const pvPreset = {
   dropdown: {
     root: {
-      class: 'w-full md:w-20rem shadow-4 m-1 p-1 border-1 border-round-lg',
+      class: 'shadow-2 md:shadow-4 m-1 p-1 border-1 border-round-lg',
     },
     item: { class: 'text-sm md:text-lg  font-semibold' },
     input: { class: 'text-sm md:text-lg  font-semibold' },
   },
   listbox: {
     root: {
-      class: 'w-full md:w-20rem shadow-4 m-1 p-1 border-1 border-round-lg',
+      class: 'shadow-4 m-1 p-1 border-1 border-round-lg',
     },
     item: { class: 'text-sm md:text-lg  font-semibold' },
     input: { class: 'text-sm md:text-lg  font-semibold' },

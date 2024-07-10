@@ -52,14 +52,3 @@
   //
   watch(year, () => emit('submitted', year.value))
 </script>
-
-<style lang="scss" scoped>
-  .p-dropdown {
-    width: 20rem;
-  }
-  @media screen and (max-width: 640px) {
-    .p-treeselect {
-      width: 100%;
-    }
-  }
-</style>
