@@ -7,7 +7,6 @@
     <div class="topsectioncenter">
       <div class="topsectionitem">
         <common-header title="Game Schedule and Results" />
-        season = {{ season }}
       </div>
 
       <div class="topsectionitem">
