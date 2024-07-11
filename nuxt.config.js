@@ -47,8 +47,7 @@ export default defineNuxtConfig({
 
   primevue: {
     importPT: {
-      as: 'MyCustomPreset',
-      from: './assets/sass/presets/primevue_preset.js',
+      from: './assets/pvpresets/primevue_preset.js',
     },
   },
 
