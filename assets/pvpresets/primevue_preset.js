@@ -100,7 +100,7 @@ const pvPreset = {
       style: {
         'background-color': '#transparent',
       },
-      class: 'text-xs md:text-sm p-1 md:p-2',
+      class: 'text-xs md:text-sm lg:text-base p-1',
     },
   },
 }
