@@ -98,9 +98,9 @@ const pvPreset = {
 
     content: {
       style: {
-        padding: '0.3rem',
         'background-color': '#transparent',
       },
+      class: 'text-xs md:text-sm p-1 md:p-2',
     },
   },
 }
