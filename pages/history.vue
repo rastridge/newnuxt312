@@ -12,6 +12,7 @@
           :value="history"
           class="p-datatable-sm my-text-style"
           striped-rows
+          showGridlines
           tableStyle="min-width: 50rem"
           paginator
           :rows="20"
