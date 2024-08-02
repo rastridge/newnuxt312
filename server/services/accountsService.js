@@ -6,31 +6,31 @@ const { doDBQueryBuffalorugby } = useQuery()
 const { getConnectionBuffalorugby } = useDBConnection()
 
 export const accountsService = {
-	getRecentUpdates,
-	getAll,
-	getOne,
-	addOne,
-	editOne,
-	changeStatus,
-	deleteOne,
+  getRecentUpdates,
+  getAll,
+  getOne,
+  addOne,
+  editOne,
+  changeStatus,
+  deleteOne,
 
-	getOfficers,
-	getWof,
-	getSuggestions,
+  getOfficers,
+  getWof,
+  getSuggestions,
 
-	getShow,
-	getMemberTypes,
-	getMemberAdminTypes,
-	// getOneFlag,
-	// addOneFlag,
-	// addFlagByRegister,
-	// getAllFlag,
-	// editOneFlag,
-	lookupByEmail,
+  getShow,
+  getMemberTypes,
+  getMemberAdminTypes,
+  // getOneFlag,
+  // addOneFlag,
+  // addFlagByRegister,
+  // getAllFlag,
+  // editOneFlag,
+  lookupByEmail,
 }
 
 async function lookupByEmail(email) {
-	const sql = `SELECT
+  const sql = `SELECT
 							account_id as id,
 							account_id
 						FROM
@@ -40,16 +40,16 @@ async function lookupByEmail(email) {
 							AND
 							account_email LIKE '${email}'`
 
-	// filename messsage, variable
-	// activityLog('lookupByEmail', 'sql=', sql)
+  // filename messsage, variable
+  // activityLog('lookupByEmail', 'sql=', sql)
 
-	const accounts = await doDBQueryBuffalorugby(sql)
-	// return accounts[0].id
-	return accounts
+  const accounts = await doDBQueryBuffalorugby(sql)
+  // return accounts[0].id
+  return accounts
 }
 
 async function getRecentUpdates() {
-	const sql = `SELECT
+  const sql = `SELECT
 									account_id,
 									CONCAT(member_firstname," ", member_lastname) as name,
 									modified_dt
@@ -65,12 +65,12 @@ async function getRecentUpdates() {
 									modified_dt DESC
 								LIMIT 20`
 
-	const recent = await doDBQueryBuffalorugby(sql)
-	return recent
+  const recent = await doDBQueryBuffalorugby(sql)
+  return recent
 }
 
 async function getAll() {
-	const sql = `SELECT 
+  const sql = `SELECT
 									account_id as id,
 									account_id,
 									member_type_id,
@@ -99,43 +99,43 @@ async function getAll() {
 							WHERE deleted = 0
 							ORDER BY member_lastname ASC`
 
-	const accounts = await doDBQueryBuffalorugby(sql)
-	return accounts
+  const accounts = await doDBQueryBuffalorugby(sql)
+  return accounts
 }
 async function getOne(id) {
-	const sql = `SELECT *
+  const sql = `SELECT *
 							FROM inbrc_accounts
 							WHERE account_id = ?`
-	const accounts = await doDBQueryBuffalorugby(sql, [id])
-	const account = accounts[0]
-	return account
+  const accounts = await doDBQueryBuffalorugby(sql, [id])
+  const account = accounts[0]
+  return account
 }
 
 /***************************************** */
 /*              addOne                     */
 /***************************************** */
 async function addOne(info) {
-	const CONN = await getConnectionBuffalorugby()
-	try {
-		await CONN.query('START TRANSACTION')
+  const CONN = await getConnectionBuffalorugby()
+  try {
+    await CONN.query('START TRANSACTION')
 
-		// check for existing email
-		let msg = null // will be returned with message if email exists
-		let sql = `SELECT * FROM inbrc_accounts WHERE deleted = 0`
-		const [rows] = await CONN.execute(sql)
-		const temp = rows
-		const lc_account_email = info.account_email.toLowerCase()
-		const emailExists = temp.find(
-			(u) => u.account_email.toLowerCase() === lc_account_email
-		)
+    // check for existing email
+    let msg = null // will be returned with message if email exists
+    let sql = `SELECT * FROM inbrc_accounts WHERE deleted = 0`
+    const [rows] = await CONN.execute(sql)
+    const temp = rows
+    const lc_account_email = info.account_email.toLowerCase()
+    const emailExists = temp.find(
+      (u) => u.account_email.toLowerCase() === lc_account_email,
+    )
 
-		// If no email conflict
-		//
-		if (!emailExists) {
-			//
-			// add record
-			//
-			let sql = `INSERT INTO inbrc_accounts
+    // If no email conflict
+    //
+    if (!emailExists) {
+      //
+      // add record
+      //
+      let sql = `INSERT INTO inbrc_accounts
 									SET
 									account_email = ?,
 									member_firstname = ?,
@@ -165,113 +165,113 @@ async function addOne(info) {
 									status = 1,
 									created_dt = NOW(),
 									modified_dt= NOW();`
-			const {
-				member_firstname,
-				member_lastname,
+      const {
+        member_firstname,
+        member_lastname,
 
-				member_year,
-				account_addr_street,
-				account_addr_street_ext,
-				account_addr_city,
-				account_addr_state,
-				account_addr_country,
-				account_addr_postal,
-				account_addr_phone,
-				member_prev_club,
+        member_year,
+        account_addr_street,
+        account_addr_street_ext,
+        account_addr_city,
+        account_addr_state,
+        account_addr_country,
+        account_addr_postal,
+        account_addr_phone,
+        member_prev_club,
 
-				member_show_phone,
-				member_show_addr,
-				newsletter_recipient,
-				mail_recipient,
-				sms_recipient,
+        member_show_phone,
+        member_show_addr,
+        newsletter_recipient,
+        mail_recipient,
+        sms_recipient,
 
-				member_type_id,
-				member_type2_id,
-				member_admin_type_id,
-				member_admin_type2_id,
-			} = info
-			let inserts = []
-			inserts.push(
-				lc_account_email,
-				member_firstname,
-				member_lastname,
+        member_type_id,
+        member_type2_id,
+        member_admin_type_id,
+        member_admin_type2_id,
+      } = info
+      let inserts = []
+      inserts.push(
+        lc_account_email,
+        member_firstname,
+        member_lastname,
 
-				member_year,
-				account_addr_street,
-				account_addr_street_ext,
-				account_addr_city,
-				account_addr_state,
-				account_addr_country,
-				account_addr_postal,
-				account_addr_phone,
-				member_prev_club,
+        member_year,
+        account_addr_street,
+        account_addr_street_ext,
+        account_addr_city,
+        account_addr_state,
+        account_addr_country,
+        account_addr_postal,
+        account_addr_phone,
+        member_prev_club,
 
-				member_show_phone,
-				member_show_addr,
-				newsletter_recipient,
-				mail_recipient,
-				sms_recipient,
+        member_show_phone,
+        member_show_addr,
+        newsletter_recipient,
+        mail_recipient,
+        sms_recipient,
 
-				member_type_id,
-				member_type2_id,
-				member_admin_type_id,
-				member_admin_type2_id
-			)
-			sql = mysql.format(sql, inserts)
-			await CONN.execute(sql)
+        member_type_id,
+        member_type2_id,
+        member_admin_type_id,
+        member_admin_type2_id,
+      )
+      sql = mysql.format(sql, inserts)
+      await CONN.execute(sql)
 
-			//
-			// Compose and send individual email
-			//
-			const email_msg =
-				'An account for account ' +
-				member_firstname +
-				' ' +
-				member_lastname +
-				'  has been created ' +
-				' email = ' +
-				lc_account_email
+      //
+      // Compose and send individual email
+      //
+      const email_msg =
+        'An account for account ' +
+        member_firstname +
+        ' ' +
+        member_lastname +
+        '  has been created ' +
+        ' email = ' +
+        lc_account_email
 
-			await sendEmail(
-				CONFIG.TO,
-				'Buffalo Rugby Club Member Account Creation',
-				email_msg
-			)
-		} else {
-			msg = 'An account with email ' + lc_account_email + ' already exists'
-		}
+      await sendEmail(
+        CONFIG.TO,
+        'Buffalo Rugby Club Member Account Creation',
+        email_msg,
+      )
+    } else {
+      msg = 'An account with email ' + lc_account_email + ' already exists'
+    }
 
-		await CONN.query('COMMIT')
-		await CONN.end()
-		return { message: msg }
-	} catch (e) {
-		await CONN.query('ROLLBACK')
-		await CONN.end()
-		return 'ROLLBACK ' + e
-	}
+    await CONN.query('COMMIT')
+    await CONN.end()
+    return { message: msg }
+  } catch (e) {
+    await CONN.query('ROLLBACK')
+    await CONN.end()
+    return 'ROLLBACK ' + e
+  }
 }
 
 /***************************************** */
 /*               editOne                   */
 /***************************************** */
 async function editOne(info) {
-	const CONN = await getConnectionBuffalorugby()
-	try {
-		await CONN.query('START TRANSACTION')
+  const CONN = await getConnectionBuffalorugby()
+  try {
+    await CONN.query('START TRANSACTION')
 
-		// check for other users with proposed email address
-		let msg = null // will be returned with message if email exists
-		let sql = `SELECT * FROM inbrc_accounts WHERE deleted = 0 AND account_id <> ${info.account_id}`
-		const [rows] = await CONN.execute(sql)
-		const temp = rows
-		const lc_account_email = info.account_email.toLowerCase()
-		const emailExists = temp.find(
-			(u) => u.account_email.toLowerCase() === lc_account_email
-		)
-		// If no email conflict
-		//
-		if (!emailExists) {
-			let sql = `UPDATE inbrc_accounts
+    // check for other users with proposed email address
+    let msg = null // will be returned with message if email exists
+    let sql = `SELECT * FROM inbrc_accounts WHERE deleted = 0 AND account_id <> ${info.account_id}`
+    const [rows] = await CONN.execute(sql)
+    const temp = rows
+    const lc_account_email = info.account_email.toLowerCase()
+    const emailExists = temp.find(
+      (u) => u.account_email.toLowerCase() === lc_account_email,
+    )
+    // If no email conflict
+    //
+    if (!emailExists) {
+      let sql = `UPDATE inbrc_accounts
 							SET
 									account_email = ?,
 									member_firstname = ?,
@@ -302,156 +302,156 @@ async function editOne(info) {
 									member_admin_type2_id = ?,
 									modified_dt= NOW()
 								WHERE account_id = ?;`
-			const {
-				member_firstname,
-				member_lastname,
+      const {
+        member_firstname,
+        member_lastname,
 
-				member_year,
-				account_addr_street,
-				account_addr_street_ext,
-				account_addr_city,
-				account_addr_state,
-				account_addr_country,
-				account_addr_postal,
-				account_addr_phone,
-				member_prev_club,
+        member_year,
+        account_addr_street,
+        account_addr_street_ext,
+        account_addr_city,
+        account_addr_state,
+        account_addr_country,
+        account_addr_postal,
+        account_addr_phone,
+        member_prev_club,
 
-				member_show_phone,
-				member_show_addr,
-				newsletter_recipient,
-				mail_recipient,
-				sms_recipient,
+        member_show_phone,
+        member_show_addr,
+        newsletter_recipient,
+        mail_recipient,
+        sms_recipient,
 
-				member_wall_of_fame_year,
-				member_pic_path,
+        member_wall_of_fame_year,
+        member_pic_path,
 
-				member_type_id,
-				member_type2_id,
-				member_admin_type_id,
-				member_admin_type2_id,
+        member_type_id,
+        member_type2_id,
+        member_admin_type_id,
+        member_admin_type2_id,
 
-				account_id,
-			} = info
+        account_id,
+      } = info
 
-			let inserts = []
-			inserts.push(
-				lc_account_email,
-				member_firstname,
-				member_lastname,
+      let inserts = []
+      inserts.push(
+        lc_account_email,
+        member_firstname,
+        member_lastname,
 
-				member_year,
-				account_addr_street,
-				account_addr_street_ext,
-				account_addr_city,
-				account_addr_state,
-				account_addr_country,
-				account_addr_postal,
-				account_addr_phone,
-				member_prev_club,
+        member_year,
+        account_addr_street,
+        account_addr_street_ext,
+        account_addr_city,
+        account_addr_state,
+        account_addr_country,
+        account_addr_postal,
+        account_addr_phone,
+        member_prev_club,
 
-				member_show_phone,
-				member_show_addr,
-				newsletter_recipient,
-				mail_recipient,
-				sms_recipient,
+        member_show_phone,
+        member_show_addr,
+        newsletter_recipient,
+        mail_recipient,
+        sms_recipient,
 
-				member_wall_of_fame_year,
-				member_pic_path,
+        member_wall_of_fame_year,
+        member_pic_path,
 
-				member_type_id,
-				member_type2_id,
-				member_admin_type_id,
-				member_admin_type2_id,
+        member_type_id,
+        member_type2_id,
+        member_admin_type_id,
+        member_admin_type2_id,
 
-				account_id
-			)
+        account_id,
+      )
 
-			sql = mysql.format(sql, inserts)
-			await CONN.execute(sql)
+      sql = mysql.format(sql, inserts)
+      await CONN.execute(sql)
 
-			await CONN.execute(sql)
-		} else {
-			msg = 'Account with email ' + info.account_email + ' already exists'
-		}
+      await CONN.execute(sql)
+    } else {
+      msg = 'Account with email ' + info.account_email + ' already exists'
+    }
 
-		await CONN.query('COMMIT')
-		await CONN.end()
+    await CONN.query('COMMIT')
+    await CONN.end()
 
-		return { message: msg }
-	} catch (e) {
-		await CONN.query('ROLLBACK')
-		await CONN.end()
-		return 'ROLLBACK ' + e
-	}
+    return { message: msg }
+  } catch (e) {
+    await CONN.query('ROLLBACK')
+    await CONN.end()
+    return 'ROLLBACK ' + e
+  }
 }
 
 async function deleteOne(id) {
-	let message = null
-	const conn = await getConnectionBuffalorugby()
-	try {
-		await conn.query('START TRANSACTION')
+  let message = null
+  const conn = await getConnectionBuffalorugby()
+  try {
+    await conn.query('START TRANSACTION')
 
-		//
-		// check for games played
-		// if so do not delete
-		//
-		let sql = `SELECT
+    //
+    // check for games played
+    // if so do not delete
+    //
+    let sql = `SELECT
 				count(*) as played
 			FROM
 				inbrc_stats_player
 			WHERE
 				(player_id = ${id} OR replaced_by = ${id}) AND deleted = 0;`
-		let inserts = []
-		sql = mysql.format(sql, inserts)
-		const games = await conn.execute(sql)
-		const played = games[0][0].played
-		if (played === 0) {
-			sql = `UPDATE inbrc_accounts
+    let inserts = []
+    sql = mysql.format(sql, inserts)
+    const games = await conn.execute(sql)
+    const played = games[0][0].played
+    if (played === 0) {
+      sql = `UPDATE inbrc_accounts
 							SET
 									deleted = '1',
 									deleted_dt= NOW()
 								WHERE account_id = ?;`
-			inserts = []
-			inserts.push(id)
-			sql = mysql.format(sql, inserts)
-			await conn.execute(sql)
+      inserts = []
+      inserts.push(id)
+      sql = mysql.format(sql, inserts)
+      await conn.execute(sql)
 
-			sql = `UPDATE inbrc_newsletter_openings
+      sql = `UPDATE inbrc_newsletter_openings
 							SET
 									deleted = '1'
 								WHERE account_id = ?;`
-			inserts = []
-			inserts.push(id)
-			sql = mysql.format(sql, inserts)
-			await conn.execute(sql)
-		} else {
-			message = 'Member is on a game roster, cannot delete'
-		}
+      inserts = []
+      inserts.push(id)
+      sql = mysql.format(sql, inserts)
+      await conn.execute(sql)
+    } else {
+      message = 'Member is on a game roster, cannot delete'
+    }
 
-		await conn.query('COMMIT')
-		await conn.end()
-		return message
-	} catch (e) {
-		await conn.query('ROLLBACK')
-		await conn.end()
-		return 'ROLLBACK ' + e
-	}
+    await conn.query('COMMIT')
+    await conn.end()
+    return message
+  } catch (e) {
+    await conn.query('ROLLBACK')
+    await conn.end()
+    return 'ROLLBACK ' + e
+  }
 }
 
 async function changeStatus({ id, status }) {
-	const sql = `UPDATE inbrc_accounts
+  const sql = `UPDATE inbrc_accounts
 							SET
 									status = ?,
 									deleted_dt= NOW()
 								WHERE account_id = ?;`
-	let inserts = []
-	inserts.push(status, id)
-	const accounts = await doDBQueryBuffalorugby(sql, inserts)
-	return accounts
+  let inserts = []
+  inserts.push(status, id)
+  const accounts = await doDBQueryBuffalorugby(sql, inserts)
+  return accounts
 }
 
 async function getShow() {
-	const sql = `SELECT
+  const sql = `SELECT
 									a.account_id,
 									a.account_email,
 									a.member_firstname,
@@ -491,13 +491,13 @@ async function getShow() {
 									inbrc_accounts a,
 									inbrc_member_types mt
 							WHERE
-									a.member_type_id NOT IN('9', '13') AND a.STATUS = 1 AND a.deleted = 0 AND a.member_type_id = mt.member_type_id  
+									a.member_type_id NOT IN('13') AND a.STATUS = 1 AND a.deleted = 0 AND a.member_type_id = mt.member_type_id
 							ORDER BY a.member_lastname ASC`
 
-	const accounts = await doDBQueryBuffalorugby(sql)
-	return accounts
+  const accounts = await doDBQueryBuffalorugby(sql)
+  return accounts
 }
-/* 
+/*
 async function getAllFlag() {
 	const sql = `SELECT
 								account_id as id,
@@ -582,7 +582,7 @@ async function getOneFlag(id) {
 	return account[0]
 }
  */
-/* 
+/*
 async function addOneFlag({
 	member_guardian,
 	member_dob,
@@ -704,7 +704,7 @@ async function addOneFlag({
 	return account
 }
  */
-/* 
+/*
 async function addFlagByRegister({
 	member_guardian,
 	member_dob,
@@ -964,7 +964,7 @@ async function editOneFlag({
 }
  */
 async function getOfficers() {
-	const sql = `SELECT
+  const sql = `SELECT
 									a.account_id,
 									account_id as id,
 									account_email,
@@ -985,12 +985,12 @@ async function getOfficers() {
 								ORDER BY
 									a.member_admin_type_id`
 
-	const officers = await doDBQueryBuffalorugby(sql)
-	return officers
+  const officers = await doDBQueryBuffalorugby(sql)
+  return officers
 }
 
 async function getWof() {
-	const sql = `SELECT
+  const sql = `SELECT
 								account_id as id,
 								account_id,
 								CONCAT(member_firstname," ",member_lastname) AS name,
@@ -1004,12 +1004,12 @@ async function getWof() {
 									AND Status = 1
 							ORDER BY member_wall_of_fame_year`
 
-	const wof = await doDBQueryBuffalorugby(sql)
-	return wof
+  const wof = await doDBQueryBuffalorugby(sql)
+  return wof
 }
 
 async function getSuggestions() {
-	const sql = `SELECT
+  const sql = `SELECT
 									account_id,
 									member_firstname,
 									member_lastname,
@@ -1018,17 +1018,17 @@ async function getSuggestions() {
 							WHERE deleted = 0 AND status = 1
 							ORDER BY member_lastname ASC`
 
-	const accounts = await doDBQueryBuffalorugby(sql)
-	return accounts
+  const accounts = await doDBQueryBuffalorugby(sql)
+  return accounts
 }
 
 async function getMemberTypes() {
-	const sql = `SELECT * FROM inbrc_member_types WHERE 1`
-	const membertypes = await doDBQueryBuffalorugby(sql)
-	return membertypes
+  const sql = `SELECT * FROM inbrc_member_types WHERE 1`
+  const membertypes = await doDBQueryBuffalorugby(sql)
+  return membertypes
 }
 async function getMemberAdminTypes() {
-	const sql = `SELECT * FROM inbrc_member_admin_types WHERE 1`
-	const memberadmintypes = await doDBQueryBuffalorugby(sql)
-	return memberadmintypes
+  const sql = `SELECT * FROM inbrc_member_admin_types WHERE 1`
+  const memberadmintypes = await doDBQueryBuffalorugby(sql)
+  return memberadmintypes
 }

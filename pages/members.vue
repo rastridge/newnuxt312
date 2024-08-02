@@ -152,9 +152,10 @@
   const member_types = ref([
     'Alumni',
     'Active',
-    'Other',
+    'Pending',
     'Ad_Astra',
     'Development',
+    'Other',
     'Special',
     'Sponsor',
     'Flag',
