@@ -4,7 +4,6 @@
       <Title>Buffalo Rugby Club News</Title>
     </Head>
     <Common-header title="Current News" />
-
     <div class="my-simple-card-style">
       <div
         class="flex flex-column md:flex-row flex-wrap align-items-center md:align-items-start justify-content-center gap-2"
