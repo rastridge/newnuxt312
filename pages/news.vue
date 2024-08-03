@@ -308,7 +308,7 @@
         <Card
           v-for="item in news"
           :key="item.news_id"
-          style="width: 320px"
+          style="width: 320px; height: 320px"
           class="flex justify-content-center"
         >
           <template #title>
