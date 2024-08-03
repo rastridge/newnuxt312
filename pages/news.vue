@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head>
-      <Title>Buffalo Rugby Club New</Title>
+      <Title>Buffalo Rugby Club Ne</Title>
     </Head>
     <Common-header title="Current News" />
     <div class="my-simple-card-style">
