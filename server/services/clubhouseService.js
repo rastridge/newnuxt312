@@ -1,18 +1,18 @@
 const { doDBQueryBuffalorugby } = useQuery()
 
 export const clubhouseService = {
-	getAll,
-	getAllCurrent,
-	getOne,
-	getRoom,
-	addOne,
-	editOne,
-	deleteOne,
-	changeStatus,
+  getAll,
+  getAllCurrent,
+  getOne,
+  getRoom,
+  addOne,
+  editOne,
+  deleteOne,
+  changeStatus,
 }
 
 async function getAll() {
-	const sql = `SELECT
+  const sql = `SELECT
 									clubhouse_id,
 									clubhouse_id as id,
 									clubhouse_title,
@@ -20,8 +20,8 @@ async function getAll() {
 									clubhouse_date,
 									clubhouse_description,
 									clubhouse_filepath,
-									clubhouse_category,									
-									clubhouse_owner,									
+									clubhouse_category,
+									clubhouse_owner,
 									status,
 									deleted,
 									deleted_dt,
@@ -33,13 +33,13 @@ async function getAll() {
 									deleted = 0
                 ORDER BY dt DESC`
 
-	const clubhouse = await doDBQueryBuffalorugby(sql)
+  const clubhouse = await doDBQueryBuffalorugby(sql)
 
-	return clubhouse
+  return clubhouse
 }
 
 async function getAllCurrent() {
-	const sql = `SELECT
+  const sql = `SELECT
 										clubhouse_id,
 										clubhouse_id as id,
 										clubhouse_title,
@@ -48,7 +48,7 @@ async function getAllCurrent() {
                     clubhouse_description,
 										clubhouse_filepath,
 										clubhouse_category,
-										clubhouse_owner,									
+										clubhouse_owner,
 										status,
 										deleted,
 										deleted_dt,
@@ -61,13 +61,13 @@ async function getAllCurrent() {
                     AND
                     status = 1
                 ORDER BY dt DESC`
-	const clubhouse = await doDBQueryBuffalorugby(sql)
-	return clubhouse
+  const clubhouse = await doDBQueryBuffalorugby(sql)
+  return clubhouse
 }
 
 async function getOne(id) {
-	const sql =
-		`SELECT 
+  const sql =
+    `SELECT
 				clubhouse_id,
 				clubhouse_id as id,
 				clubhouse_title,
@@ -75,17 +75,17 @@ async function getOne(id) {
 				clubhouse_date,
 				clubhouse_description,
 				clubhouse_filepath,
-				clubhouse_owner,									
+				clubhouse_owner,
 				clubhouse_category
 			FROM inbrc_clubhouse
 			WHERE clubhouse_id = ` + id
 
-	const clubhouse = await doDBQueryBuffalorugby(sql)
-	return clubhouse[0]
+  const clubhouse = await doDBQueryBuffalorugby(sql)
+  return clubhouse[0]
 }
 
 async function getRoom(room) {
-	const sql = `SELECT 
+  const sql = `SELECT
 									clubhouse_id,
 									clubhouse_id as room,
 									clubhouse_title,
@@ -93,9 +93,9 @@ async function getRoom(room) {
 									clubhouse_date,
 									clubhouse_description,
 									clubhouse_filepath,
-									clubhouse_owner,								
+									clubhouse_owner,
 									clubhouse_category
-								FROM 
+								FROM
 									inbrc_clubhouse
 								WHERE
 									status = 1
@@ -104,82 +104,82 @@ async function getRoom(room) {
 									AND
 									clubhouse_category = "${room}"
 								ORDER BY
-									clubhouse_date ASC`
+									clubhouse_date DESC`
 
-	const rm = await doDBQueryBuffalorugby(sql)
-	return rm
+  const rm = await doDBQueryBuffalorugby(sql)
+  return rm
 }
 
 async function addOne({
-	clubhouse_title,
-	clubhouse_date,
-	clubhouse_description,
-	clubhouse_filepath,
-	clubhouse_category,
-	clubhouse_owner,
+  clubhouse_title,
+  clubhouse_date,
+  clubhouse_description,
+  clubhouse_filepath,
+  clubhouse_category,
+  clubhouse_owner,
 }) {
-	const sql = `INSERT INTO inbrc_clubhouse SET
+  const sql = `INSERT INTO inbrc_clubhouse SET
 								clubhouse_title = ?,
 								clubhouse_date = ?,
 								clubhouse_description = ?,
 								clubhouse_filepath = ?,
 								clubhouse_category = ?,
-								clubhouse_owner = ?,									
+								clubhouse_owner = ?,
 								created_dt = NOW(),
 								modified_dt= NOW()`
-	let inserts = []
-	inserts.push(
-		clubhouse_title,
-		clubhouse_date,
-		clubhouse_description,
-		clubhouse_filepath,
-		clubhouse_category,
-		clubhouse_owner
-	)
-	const clubhouse = await doDBQueryBuffalorugby(sql, inserts)
-	return clubhouse
+  let inserts = []
+  inserts.push(
+    clubhouse_title,
+    clubhouse_date,
+    clubhouse_description,
+    clubhouse_filepath,
+    clubhouse_category,
+    clubhouse_owner,
+  )
+  const clubhouse = await doDBQueryBuffalorugby(sql, inserts)
+  return clubhouse
 }
 
 async function editOne({
-	id,
-	clubhouse_title,
-	clubhouse_date,
-	clubhouse_description,
-	clubhouse_filepath,
-	clubhouse_category,
-	clubhouse_owner,
+  id,
+  clubhouse_title,
+  clubhouse_date,
+  clubhouse_description,
+  clubhouse_filepath,
+  clubhouse_category,
+  clubhouse_owner,
 }) {
-	const sql = `UPDATE inbrc_clubhouse SET
+  const sql = `UPDATE inbrc_clubhouse SET
 								clubhouse_title = ?,
 								clubhouse_date = ?,
 								clubhouse_description = ?,
 								clubhouse_filepath = ?,
 								clubhouse_category = ?,
-								clubhouse_owner = ?,									
+								clubhouse_owner = ?,
 								modified_dt= NOW()
 							WHERE clubhouse_id = ?`
-	let inserts = []
-	inserts.push(
-		clubhouse_title,
-		clubhouse_date,
-		clubhouse_description,
-		clubhouse_filepath,
-		clubhouse_category,
-		clubhouse_owner,
-		id
-	)
-	const clubhouse = await doDBQueryBuffalorugby(sql, inserts)
-	return clubhouse
+  let inserts = []
+  inserts.push(
+    clubhouse_title,
+    clubhouse_date,
+    clubhouse_description,
+    clubhouse_filepath,
+    clubhouse_category,
+    clubhouse_owner,
+    id,
+  )
+  const clubhouse = await doDBQueryBuffalorugby(sql, inserts)
+  return clubhouse
 }
 
 async function deleteOne(id) {
-	const sql = `UPDATE inbrc_clubhouse SET deleted = 1, deleted_dt = NOW() WHERE clubhouse_id = ${id}`
-	const clubhouse = await doDBQueryBuffalorugby(sql)
-	return clubhouse
+  const sql = `UPDATE inbrc_clubhouse SET deleted = 1, deleted_dt = NOW() WHERE clubhouse_id = ${id}`
+  const clubhouse = await doDBQueryBuffalorugby(sql)
+  return clubhouse
 }
 
 async function changeStatus({ id, status }) {
-	const sql = `UPDATE inbrc_clubhouse SET status = ${status} WHERE clubhouse_id = ${id}`
-	const clubhouse = await doDBQueryBuffalorugby(sql)
-	return clubhouse
+  const sql = `UPDATE inbrc_clubhouse SET status = ${status} WHERE clubhouse_id = ${id}`
+  const clubhouse = await doDBQueryBuffalorugby(sql)
+  return clubhouse
 }
