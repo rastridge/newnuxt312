@@ -237,7 +237,12 @@ async function addOne(info) {
       // const email_list = CONFIG.TO_REGISTERED_LIST
 
       // const email_list =['ron.astridge@icloud.com','j.qualey@yahoo.com','cnrehlers@gmail.com','lexmaccubbin@yahoo.com']
-      const email_list = ['ron.astridge@icloud.com', 'rfa@me.com']
+      const email_list = [
+        'ron.astridge@icloud.com',
+        'j.qualey@yahoo.com',
+        'cnrehlers@gmail.com',
+        'lexmaccubbin@yahoo.com',
+      ]
 
       console.log('email_list = ', email_list)
 
