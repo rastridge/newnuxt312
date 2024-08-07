@@ -19,7 +19,7 @@
 <template>
   <div>
     <!-- CONFIG.public.TO_REGISTERED_LIST = {{ CONFIG.public.TO_REGISTERED_LIST }} -->
-    CONFIG.public.TO_REGISTERED_LIST =
+    CONFIG.TO_REGISTERED_LIST = {{ CONFIG.TO_REGISTERED_LIST }}
     <Head>
       <Title>Register to Join Men</Title>
     </Head>
