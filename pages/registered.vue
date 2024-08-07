@@ -8,7 +8,7 @@
 
     <p>Wear shorts, cleats and a t-shirt ( or warmer if necessary)</p>
     <p>
-      When youu arrive, ask someone to point out a coach, introduce yourself
+      When youu arrive, ask someone to point out a coach, introduce yourself.
     </p>
     <p>Do the warmup</p>
     <p>Watch a drill or activity and join in when comfortable</p>
