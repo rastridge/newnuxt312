@@ -224,21 +224,28 @@ async function addOne(info) {
       // Compose and send individual email
       //
       const email_msg =
-        'An account for account ' +
+        'A membership account for ' +
         member_firstname +
         ' ' +
         member_lastname +
         '  has been created ' +
-        ' email = ' +
-        lc_account_email
+        ' with email ' +
+        lc_account_email +
+        ' previous club ' +
+        member_prev_club
 
-      await sendEmail(
-        CONFIG.TO,
-        'Buffalo Rugby Club Member Account Creation',
-        email_msg,
-      )
-    } else {
-      msg = 'An account with email ' + lc_account_email + ' already exists'
+      const email_list = CONFIG.TO_REGISTERED_LIST
+      // console.log('email_list = ', email_list)
+
+      for (const email of email_list) {
+        // console.log('email = ', email)
+        await sendEmail(
+          // CONFIG.TO,
+          email,
+          'Buffalo Rugby Club Member Account Creation',
+          email_msg,
+        )
+      }
     }
 
     await CONN.query('COMMIT')

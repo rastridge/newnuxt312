@@ -13,6 +13,7 @@ export default defineNuxtConfig({
 
     TO: process.env.TO,
     TO_FLAG: process.env.TO_FLAG,
+    TO_REGISTERED_LIST: process.env.TO_REGISTERED_LIST.split(','),
     FROM: process.env.FROM,
     FROM_NAME: process.env.FROM_NAME,
     EE_API_KEY: process.env.EE_API_KEY,
