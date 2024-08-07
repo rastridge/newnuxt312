@@ -241,7 +241,7 @@ async function addOne(info) {
 
       console.log('email_list = ', email_list)
 
-      /*       for (const email of email_list) {
+      for (const email of email_list) {
         console.log('email = ', email)
         await sendEmail(
           // CONFIG.TO,
@@ -249,13 +249,13 @@ async function addOne(info) {
           'Buffalo Rugby Club Member Account Creation',
           email_msg,
         )
-      } */
+      }
 
-      await sendEmail(
+      /*       await sendEmail(
         CONFIG.TO,
         'Buffalo Rugby Club Member Account Creation',
         email_msg,
-      )
+      ) */
     }
 
     await CONN.query('COMMIT')
