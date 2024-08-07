@@ -234,7 +234,11 @@ async function addOne(info) {
         ' previous club ' +
         member_prev_club
 
-      const email_list = CONFIG.TO_REGISTERED_LIST
+      // const email_list = CONFIG.TO_REGISTERED_LIST
+
+      // const email_list =['ron.astridge@icloud.com','j.qualey@yahoo.com','cnrehlers@gmail.com','lexmaccubbin@yahoo.com']
+      const email_list = ['ron.astridge@icloud.com', 'rfa@me.com']
+
       console.log('email_list = ', email_list)
 
       for (const email of email_list) {
