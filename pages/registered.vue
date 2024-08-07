@@ -1,7 +1,11 @@
 <template>
   <div>
     <h3>Thanks for registering</h3>
-    <p>Now its time to come to a practice</p>
+    <p>
+      Now its time to come to a practice ( see the News page for times and
+      locations)
+    </p>
+
     <p>Wear shorts, cleats and a t-shirt ( or warmer if necessary)</p>
     <p>
       When youu arrive, ask someone to point out a coach, introduce yourself
