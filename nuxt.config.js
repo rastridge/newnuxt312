@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     DATABASE_URL: process.env.DATABASE_URL,
 
     TO: process.env.TO,
-    TO_REGISTERED_LIST: process.env.TO_REGISTERED_LIST.split(','),
+    // TO_REGISTERED_LIST: process.env.TO_REGISTERED_LIST.split(','),
     TO_FLAG: process.env.TO_FLAG,
     FROM: process.env.FROM,
     FROM_NAME: process.env.FROM_NAME,
