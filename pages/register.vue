@@ -2,6 +2,7 @@
   import { useAlertStore } from '~/stores/alertStore'
   const alert = useAlertStore()
   const { onSubmitAddByGuest } = useSubmit()
+  const CONFIG = useRuntimeConfig()
 
   //
   // Accounts form action
@@ -17,6 +18,7 @@
 
 <template>
   <div>
+    CONFIG.public.TO_REGISTERED_LIST = {{ CONFIG.public.TO_REGISTERED_LIST }}
     <Head>
       <Title>Register to Join Men</Title>
     </Head>
