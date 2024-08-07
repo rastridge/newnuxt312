@@ -235,10 +235,10 @@ async function addOne(info) {
         member_prev_club
 
       const email_list = CONFIG.TO_REGISTERED_LIST
-      // console.log('email_list = ', email_list)
+      console.log('email_list = ', email_list)
 
       for (const email of email_list) {
-        // console.log('email = ', email)
+        console.log('email = ', email)
         await sendEmail(
           // CONFIG.TO,
           email,
