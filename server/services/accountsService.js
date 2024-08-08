@@ -1,5 +1,5 @@
 ﻿import mysql from 'mysql2/promise'
-const CONFIG = useRuntimeConfig()
+// const CONFIG = useRuntimeConfig()
 
 const { sendEmail } = useEmail()
 const { doDBQueryBuffalorugby } = useQuery()
@@ -224,7 +224,7 @@ async function addOne(info) {
       // Compose and send individual email
       //
       const email_msg =
-        'A membership account for ' +
+        'A pending membership account for ' +
         member_firstname +
         ' ' +
         member_lastname +
@@ -234,35 +234,27 @@ async function addOne(info) {
         ' previous club ' +
         member_prev_club
 
-      // const email_list = CONFIG.TO_REGISTERED_LIST
-
-      // const email_list =['ron.astridge@icloud.com','j.qualey@yahoo.com','cnrehlers@gmail.com','lexmaccubbin@yahoo.com']
       const email_list = [
         'ron.astridge@icloud.com',
         'j.qualey@yahoo.com',
         'cnrehlers@gmail.com',
         'lexmaccubbin@yahoo.com',
       ]
-
-      console.log('email_list = ', email_list)
+      // const email_list = ['ron.astridge@icloud.com']
 
       for (const email of email_list) {
-        console.log('email = ', email)
+        // console.log('email = ', email)
         await sendEmail(
-          // CONFIG.TO,
           email,
           'Buffalo Rugby Club Member Account Creation',
           email_msg,
         )
       }
-
-      /*       await sendEmail(
-        CONFIG.TO,
-        'Buffalo Rugby Club Member Account Creation',
-        email_msg,
-      ) */
+    } else {
+      msg = `An account with email ${lc_account_email} already exists`
     }
 
+    // console.log('msg = ', msg)
     await CONN.query('COMMIT')
     await CONN.end()
     return { message: msg }
