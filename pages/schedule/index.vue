@@ -150,63 +150,6 @@
       </template>
     </Dialog>
 
-    <!-- 	<Dialog
-			v-model:visible="displayGameModal"
-			:breakpoints="{ '900px': '75vw', '640px': '90vw' }"
-			:style="{ width: '60vw' }"
-			:pt="{
-				root: {
-					style: {
-						padding: '0',
-						minWidth: '10rem',
-						'border-radius': '20px',
-					},
-				},
-				header: {
-					style: {
-						'background-color': '#CCC',
-					},
-				},
-				content: {
-					style: {
-						padding: '1rem',
-						'background-color': '#EEE',
-					},
-				},
-				footer: {
-					style: {
-						'background-color': '#CCC',
-					},
-				},
-			}"
-		>
-			<template #header>
-				<div>
-					<span class="text-lg font-semibold"
-						>{{ info.opponent_name }} -
-						{{
-							$dayjs.unix(info.date_ut).format('MMMM DD, YYYY @ ddd h:mm A')
-						}}</span
-					>
-					<h6 class="m-2 text-xl"></h6>
-				</div>
-			</template>
-			<div class="m-1 p-1 text-sm">
-				<display-game-info :item="info" />
-				<display-roster :players="players" />
-			</div>
-			<template #footer>
-				<div>
-					<Button
-						label="Return"
-						@click="closeModal"
-						class="p-button-sm mt-2"
-						autofocus
-					/>
-				</div>
-			</template>
-		</Dialog>
- -->
     <!-- History Modal -->
     <Dialog
       v-model:visible="displayHistoryModal"

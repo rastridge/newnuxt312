@@ -8,7 +8,7 @@
   // Get leader id
   //
   const route = useRoute()
-  const id = ref(route.params.id)
+  const id = route.params.id
   //
   // history form action
   //
@@ -21,7 +21,7 @@
 <template>
   <div>
     <Head>
-      <Title>Edit History {{ id }}</Title>
+      <Title>Edit History</Title>
     </Head>
 
     <div class="topsectioncenter">

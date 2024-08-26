@@ -308,10 +308,7 @@
 	const placemark = usePlacemarkStore() */
 
   const { $dayjs } = useNuxtApp()
-
   const { getAll } = useFetchAll()
-  // const { getMemberTypeOptions } = useMembertypes()
-  // const memberTypeOptions = await getMemberTypeOptions()
 
   const app = ref('member_info')
   const info = ref([])
