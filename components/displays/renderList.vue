@@ -207,8 +207,6 @@
     // in browser
     const pos = datalocal.value.findIndex((u) => u.id === id)
     datalocal.value[pos].status = status
-    // const pos = datalocalfindIndex((u) => u.id === id)
-    // datalocal[pos].status = status
     // in DB
     emit('changeStatus', { id, status })
   }
@@ -226,7 +224,6 @@
     // close confirm dialog
     deleteDialog.value = false
     // in browser
-    // datalocal.value = datalocal.value.filter((u) => u.id !== id)
     datalocal.value = datalocal.value.filter((u) => u.id !== id)
     // in database
     emit('deleteItem', id)
