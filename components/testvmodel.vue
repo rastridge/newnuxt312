@@ -5,8 +5,6 @@
   const emit = defineEmits(['submitted'])
 
   // ref(props.data) if data is an object is passed by reference!
-
-  // const _data = ref(JSON.parse(JSON.stringify(props.data)))
   const _data = ref({ ...props.data })
 </script>
 

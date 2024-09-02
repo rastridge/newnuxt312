@@ -166,7 +166,6 @@
   // make local copy of input data
   //
   const _data = ref([...props.data])
-  // let _data = computed(() => props.data)
 
   //
   // Initial settings for pagination
