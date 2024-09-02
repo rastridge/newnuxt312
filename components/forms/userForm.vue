@@ -1,16 +1,5 @@
 <template>
-  <!-- <div> -->
-  <p v-if="!apps_data">
-    <ProgressBar
-      mode="indeterminate"
-      style="height: 6px"
-    ></ProgressBar
-    >Loading
-  </p>
-  <div
-    v-else
-    class="my-form-style"
-  >
+  <div class="my-form-style">
     <div class="text-left">
       <p
         v-if="saving"

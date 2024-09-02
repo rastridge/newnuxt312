@@ -1,12 +1,4 @@
 <template>
-  <p v-if="!memberTypeOptions || !memberAdminTypeOptions || !state">
-    <ProgressBar
-      mode="indeterminate"
-      style="height: 6px"
-    ></ProgressBar
-    >Loading
-  </p>
-
   <div class="my-form-style">
     <display-alert />
     <FormKit
