@@ -28,8 +28,8 @@
         <DataView :value="filteredData">
           <template #list="slotProps">
             <div
-              v-for="(item, index) in slotProps.items"
-              :key="index"
+              v-for="item in slotProps.items"
+              :key="item.game_id"
               class="col-12"
             >
               <div
