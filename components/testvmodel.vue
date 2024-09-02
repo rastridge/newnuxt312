@@ -1,14 +1,30 @@
 <script setup>
+  const props = defineProps({
+    data: { type: Object, required: true },
+  })
+  const emit = defineEmits(['submitted'])
 
-// const props = defineProps(['modelValue'])
-// const emit = defineEmits(['update:modelValue'])
+  // ref(props.data) if data is an object is passed by reference!
 
-const modelValue = defineModel()
-// emit('update:modelValue', "changed from ''")
-modelValue.value = "xxxxxxx"
+  // const _data = ref(JSON.parse(JSON.stringify(props.data)))
+  const _data = ref({ ...props.data })
 </script>
 
 <template>
-	in testmodel modelValue = {{ modelValue }}
-	<!-- <input :value="props.modelValue" @input="emit('update:modelValue', $event.target.value)" /> -->
+  <p>title in component = {{ _data }}</p>
+  <form @submit.prevent="$event = emit('submitted', _data)">
+    <fieldset>
+      <label>title </label>
+      <input
+        id="title"
+        v-model="_data.title"
+      />
+    </fieldset>
+    <button
+      type="submit"
+      value="submit"
+    >
+      submit
+    </button>
+  </form>
 </template>
