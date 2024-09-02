@@ -110,7 +110,7 @@
   const props = defineProps({
     id: { type: String, default: '0' },
   })
-  // const fileInput = ref(null)
+  const edit_form = props.id !== '0'
 
   //
   // Initialize Add form
@@ -119,7 +119,7 @@
   //
   // edit if there is an id - add if not
   //
-  if (props.id !== '0') {
+  if (edit_form) {
     //
     // Initialize Edit form
     //

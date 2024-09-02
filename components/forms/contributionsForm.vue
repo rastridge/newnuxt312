@@ -104,6 +104,7 @@
   const props = defineProps({
     id: { type: String, default: '0' },
   })
+  const edit_form = props.id !== '0'
 
   const state = ref({})
 
@@ -145,9 +146,8 @@
     previous.value = data.value
   }
 
-  // Add
   //
-  if (props.id !== '0') {
+  if (edit_form) {
     // edit
     //
     const { data } = await useFetch(`/contributions/${props.id}`, {

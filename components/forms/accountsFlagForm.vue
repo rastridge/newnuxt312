@@ -192,6 +192,9 @@
   const props = defineProps({
     id: { type: String, default: '0' },
   })
+
+  const edit_form = props.id !== '0'
+
   //
   // initialize form for add
   //
@@ -212,7 +215,7 @@
   //
   // EDIT if there is an id - ADD if not
   //
-  if (props.id !== '0') {
+  if (edit_form) {
     //
     // Initialize Edit form
     //

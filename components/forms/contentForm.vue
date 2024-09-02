@@ -82,6 +82,7 @@
   const props = defineProps({
     id: { type: String, default: '0' },
   })
+  const edit_form = props.id !== '0'
 
   //
   // incoming from inputBody component
@@ -111,7 +112,7 @@
   //
   // edit if there is an id - add if not
   //
-  if (props.id !== '0') {
+  if (edit_form) {
     // get user with id === props.id
     const { data: content_data } = await useFetch(`/content/${props.id}`, {
       key: props.id,

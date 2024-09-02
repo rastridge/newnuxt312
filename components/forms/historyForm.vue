@@ -90,6 +90,7 @@
   const props = defineProps({
     id: { type: String, default: '0' },
   })
+  const edit_form = props.id !== '0'
 
   //
   // Initialize form
@@ -105,7 +106,7 @@
   //
   // edit if there is an id - add if not
   //
-  if (props.id !== '0') {
+  if (edit_form) {
     // get opponent with id === props.id
     const { data } = await useFetch(`/history/${props.id}`, {
       key: props.id,
