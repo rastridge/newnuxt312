@@ -18,7 +18,7 @@
       <div class="my-renderlist-styles">
         <DataTable
           ref="dataTableRef"
-          :value="datalocal"
+          :value="_data"
           striped-rows
           class="p-datatable-sm p-datatable-generic my-text-style"
           responsiveLayout="scroll"
@@ -58,11 +58,7 @@
             field="title"
             header="Name"
           ></Column>
-          <div
-            v-if="
-              datalocal.length && typeof datalocal[0].date_ut !== 'undefined'
-            "
-          >
+          <div v-if="_data.length && typeof _data[0].date_ut !== 'undefined'">
             <Column
               field="date_ut"
               header="Date"
@@ -169,8 +165,8 @@
   //
   // make local copy of input data
   //
-  const datalocal = ref(props.data)
-  // let datalocal = computed(() => props.data)
+  const _data = ref([...props.data])
+  // let _data = computed(() => props.data)
 
   //
   // Initial settings for pagination
@@ -196,7 +192,7 @@
   watchEffect(() => {
     // alert('watchEffect current.value ' + current.value)
     current.value = props.page
-    datalocal.value = props.data
+    _data.value = props.data
   })
 
   //
@@ -205,8 +201,8 @@
   const changeStatus = ({ id, status }) => {
     status = status ? 0 : 1
     // in browser
-    const pos = datalocal.value.findIndex((u) => u.id === id)
-    datalocal.value[pos].status = status
+    const pos = _data.value.findIndex((u) => u.id === id)
+    _data.value[pos].status = status
     // in DB
     emit('changeStatus', { id, status })
   }
@@ -224,7 +220,7 @@
     // close confirm dialog
     deleteDialog.value = false
     // in browser
-    datalocal.value = datalocal.value.filter((u) => u.id !== id)
+    _data.value = _data.value.filter((u) => u.id !== id)
     // in database
     emit('deleteItem', id)
   }
