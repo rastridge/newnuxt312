@@ -27,8 +27,9 @@
         Swal.fire('Saved', '', 'success')
         // navigateTo('/admin/newsletters')
       } else if (result.isDismissed) {
-        navigateTo('/admin/newsletters')
+        // navigateTo('/admin/newsletters')
       }
+      navigateTo('/admin/newsletters')
     })
   }
 </script>
