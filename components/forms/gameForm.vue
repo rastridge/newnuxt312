@@ -143,8 +143,7 @@
   <!-- if add OR game current date is before game date -->
   <div
     v-if="
-      props.id !== '0' ||
-      (props.id !== '0' && $dayjs().isBefore($dayjs.unix(state.date_ut)))
+      edit_form || (edit_form && $dayjs().isBefore($dayjs.unix(state.date_ut)))
     "
   >
     <!-- Select previous game for autofill -->

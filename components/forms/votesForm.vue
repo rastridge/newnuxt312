@@ -52,7 +52,7 @@
       type="list"
       dynamic
     >
-      <div v-if="props.id !== '0'">
+      <div v-if="edit_form">
         <FormKit
           v-for="(item, index) in items"
           :key="item"
@@ -163,7 +163,7 @@
 
     // problem in add
     choice_values.value.forEach((item, index) => {
-      if (props.id !== '0') {
+      if (edit_form) {
         updated_choices.value.push({
           vote_choice: item,
           vote_picked_cnt: choices.value[index].vote_picked_cnt,
