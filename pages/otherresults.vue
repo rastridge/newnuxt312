@@ -12,7 +12,7 @@
         <Card>
           <template #content>
             <nuxt-link
-              to="https://xplorer.rugby/empire/fixtures-results?comp=7i8kPXDpmeAyzH2Mu&team=All&season=All&tab=Results"
+              to="https://xplorer.rugby/empire/fixtures-results?comp=7i8kPXDpmeAyzH2Mu&team=All&season=2025&tab=Fixtures"
               target="_blank"
               rel="noopener"
             >
@@ -22,7 +22,7 @@
               ></Button>
             </nuxt-link>
             <nuxt-link
-              to="https://xplorer.rugby/empire/fixtures-results?comp=7i8kPXDpmeAyzH2Mu&team=All&season=All&tab=Results"
+              to="https://xplorer.rugby/empire/fixtures-results?comp=9LmeCHHfxEnJCEmap&team=All&season=2025&tab=Fixtures"
               target="_blank"
               rel="noopener"
             >
