@@ -218,9 +218,7 @@
     // deletion confirmed
     // close confirm dialog
     deleteDialog.value = false
-    // in browser
-    _data.value = _data.value.filter((u) => u.id !== id)
-    // in database
+    // "exists in game" warning steps found in deleteItem
     emit('deleteItem', id)
   }
 </script>

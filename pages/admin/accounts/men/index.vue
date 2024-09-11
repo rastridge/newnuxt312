@@ -58,7 +58,6 @@
       <template #footer>
         <Button
           label="Continue"
-          outlined
           autofocus
           @click="visible = false"
         />
@@ -117,7 +116,7 @@
     return temp
   })
 
-  // Save current after changes
+  // Save current member_type_id after changes - Placemarks
   watch(member_type_id, (newid) => {
     placemark.setMemberTypeId(newid)
     placemark.setAlpha('1')
@@ -125,7 +124,7 @@
     placemark.setPage(0)
     page.value = 0
   })
-
+  // Save current member_type_id after changes - Placemarks
   watch(alpha, (newalpha) => {
     placemark.setAlpha(newalpha)
     placemark.setPage(0)
@@ -133,7 +132,7 @@
   })
 
   //
-  // Get membertype opyions
+  // Get membertype options
   //
 
   const memberTypeOptions = await getMemberTypeOptions()
@@ -178,6 +177,10 @@
     if (msg.value) {
       message.value = msg.value
       visible.value = true
+    } else {
+      // remove from accounts
+      // will trigger change in filteredData passed to renderlist
+      accounts.value = accounts.value.filter((u) => u.id !== id)
     }
   }
 
